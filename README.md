@@ -1,5 +1,5 @@
 # fellowship-pair-bot
-A Telegram bot that automatically pairs church members for weekly fellowship. Users join with /pairme, and the bot sends random pairings every Sunday at dinner time (7 PM Ethiopian time). Supports multiple church groups with automatic group detection.
+A Telegram bot that automatically pairs church members for weekly fellowship. Users join with /pairme, and the bot sends random pairings every Saturday at dinner time (7 PM Ethiopian time). Supports multiple church groups with automatic group detection.
 
 ## Features
 - Auto-detects church groups
@@ -19,4 +19,4 @@ A Telegram bot that automatically pairs church members for weekly fellowship. Us
 3. Add to church group chats
 
 ## Schedule
-Pairings sent every Sunday at 7 PM Ethiopian time (4 PM UTC)
+Pairings sent every Saturday at 7 PM Ethiopian time (4 PM UTC)
