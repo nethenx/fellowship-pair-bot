@@ -399,7 +399,7 @@ class ChurchPairingBot:
 
 async def main():
     # Replace with your actual bot token from BotFather
-    TOKEN = "8189938490:AAEZrsafKGy06N3QYSePHu7siZDHOto28JA"
+    TOKEN = "ADD_YOUR_ACTUALLLLLLLL_TOKEN_HERE"
     
     bot = ChurchPairingBot(TOKEN)
     await bot.run()
