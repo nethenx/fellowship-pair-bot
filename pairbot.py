@@ -2,11 +2,11 @@ import json
 import random
 import asyncio
 import threading
+import os
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes
 from datetime import datetime, timezone
 import logging
-import os
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 
@@ -247,7 +247,7 @@ class ChurchPairingBot:
         await update.message.reply_text(
             f"👥 **Current Participants ({len(users)}):**\n\n"
             f"{participant_list}\n\n"
-                            f"📅 Next pairing: Sunday 7 PM Ethiopian time"
+            f"📅 Next pairing: Sunday 7 PM Ethiopian time"
         )
 
     def generate_pairs(self, users_dict):
@@ -376,7 +376,7 @@ class ChurchPairingBot:
         try:
             # Start the scheduler
             self.scheduler.start()
-            logger.info("Scheduler started - weekly pairings set for Sunday 9 AM UTC")
+            logger.info("Scheduler started - weekly pairings set for Sunday 7 PM Ethiopian time (4 PM UTC)")
             
             # Start the bot
             logger.info("Starting bot...")
@@ -398,8 +398,13 @@ class ChurchPairingBot:
             self.scheduler.shutdown()
 
 async def main():
-    # Replace with your actual bot token from BotFather
-    TOKEN = "ADD_YOUR_ACTUALLLLLLLL_TOKEN_HERE"
+    # Get bot token from environment variable for security
+    TOKEN = os.getenv('BOT_TOKEN')
+    
+    if not TOKEN:
+        print("❌ Please set BOT_TOKEN environment variable!")
+        print("💡 In Railway: Variables tab → Add BOT_TOKEN = your_token")
+        return
     
     bot = ChurchPairingBot(TOKEN)
     await bot.run()
