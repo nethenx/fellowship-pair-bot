@@ -34,11 +34,11 @@ class ChurchPairingBot:
         self.app.add_handler(CommandHandler("leave", self.leave))
         self.app.add_handler(CommandHandler("mypair", self.mypair))
         
-        # Schedule weekly pairings for Sunday 7 PM Ethiopian time (4 PM UTC)
+        # Schedule weekly pairings for Saturday 7 PM Ethiopian time (4 PM UTC)
         # Ethiopian time is UTC+3, so 7 PM ET = 4 PM UTC
         self.scheduler.add_job(
             self.send_weekly_pairings,
-            CronTrigger(day_of_week=6, hour=16, minute=0),  # Sunday = 6, 4 PM UTC = 7 PM Ethiopian
+            CronTrigger(day_of_week=5, hour=16, minute=0),  # Saturday = 5, 4 PM UTC = 7 PM Ethiopian
             id='weekly_pairings'
         )
 
@@ -76,7 +76,7 @@ class ChurchPairingBot:
                 "📊 Use /status to see current participants\n"
                 "👥 Use /mypair to see your pairing status\n"
                 "🚪 Use /leave to remove yourself from pairings\n\n"
-                "💫 Every Sunday at 7 PM Ethiopian time (dinner time), I'll randomly pair members and post the results here!"
+                "💫 Every Saturday at 7 PM Ethiopian time (dinner time), I'll randomly pair members and post the results here!"
             )
 
     async def pairme(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -126,7 +126,7 @@ class ChurchPairingBot:
         await update.message.reply_text(
             f"🎯 {username}, you've been added to the weekly pairing list!\n"
             f"👥 Total participants in this group: {participant_count}\n\n"
-            f"📅 Next pairing: Sunday 7 PM Ethiopian time"
+            f"📅 Next pairing: Saturday 7 PM Ethiopian time"
         )
 
     async def leave(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -219,7 +219,7 @@ class ChurchPairingBot:
         
         status_lines.extend([
             "",
-            "📅 **Next Pairing:** Sunday 7 PM Ethiopian time"
+            "📅 **Next Pairing:** Saturday 7 PM Ethiopian time"
         ])
         
         await update.message.reply_text("\n".join(status_lines))
@@ -247,7 +247,7 @@ class ChurchPairingBot:
         await update.message.reply_text(
             f"👥 **Current Participants ({len(users)}):**\n\n"
             f"{participant_list}\n\n"
-            f"📅 Next pairing: Sunday 7 PM Ethiopian time"
+            f"📅 Next pairing: Saturday 7 PM Ethiopian time"
         )
 
     def generate_pairs(self, users_dict):
@@ -376,7 +376,7 @@ class ChurchPairingBot:
         try:
             # Start the scheduler
             self.scheduler.start()
-            logger.info("Scheduler started - weekly pairings set for Sunday 7 PM Ethiopian time (4 PM UTC)")
+            logger.info("Scheduler started - weekly pairings set for Saturday 7 PM Ethiopian time (4 PM UTC)")
             
             # Start the bot
             logger.info("Starting bot...")
